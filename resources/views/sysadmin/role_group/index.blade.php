@@ -7,16 +7,12 @@
         <div class="col-12">
           <div class="card">
             <!-- /.card-header -->
-              <div class="card-body text-right">
-                <a class="btn btn-primary" href="{{ route('sysadmin.user_group.new') }}">
-                      <i class="fas fa-plus"></i> Add
-                </a>
-              </div>
             @if(isset($list) && $list->count() >0)
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>Name</th>
+                  <th>Permissions</th>
                   <th>Actions</th>
                 </tr>
                 </thead>
@@ -24,12 +20,10 @@
                 @foreach($list as $data)
                   <tr>
                     <td>{{ $data->name }}</td>
+                    <td>0</td>
                     <td>
-                    <a class="btn btn-primary btn-sm" href="{{ route('sysadmin.user_group.edit', $data) }}" title="Edit">
+                    <a class="btn btn-primary btn-sm" href="{{ route('sysadmin.role_group.edit', $data) }}" title="Edit">
                       <i class="fas fa-edit"></i>
-                    </a>
-                    <a class="btn btn-danger btn-sm modal-delete"  data-toggle="modal" data-target="#modal-delete" href="{{ route('sysadmin.user_group.delete', $data) }}" title="Delete">
-                      <i class="fas fa-trash"></i>
                     </a>
                     </td>
                   </tr>

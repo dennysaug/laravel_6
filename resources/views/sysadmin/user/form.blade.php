@@ -20,7 +20,7 @@
               @endif
               <!-- /.card-header -->
               <!-- form start -->
-              {!! Form::model($user, ['route' => ['sysadmin.user.store',$user]]) !!}
+              {!! Form::model(isset($user)?$user:null, ['route' => ['sysadmin.user.store',isset($user)?$user:null]]) !!}
                 <div class="card-body">
                   <div class="form-group">
                     {!! Form::label('name', 'Name')!!}
@@ -34,7 +34,7 @@
                     {!! Form::label('user_group_id', 'User Group')!!}
                     {!! Form::select('user_group_id', []+$userGroups, null,['class' => 'form-control', 'id' => 'user_group_id', 'placeholder' => ""])!!}
                   </div>
-                  
+
                 <!-- /.card-body -->
 
                 <div class="card-footer">

@@ -168,7 +168,7 @@
           <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{ $user->name }}</a>
         </div>
       </div>
 
@@ -183,7 +183,7 @@
               <p>
                 Admin
                 <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">6</span>
+                <!-- <span class="badge badge-info right">6</span> -->
               </p>
             </a>
             <ul class="nav nav-treeview">
@@ -199,6 +199,18 @@
                   <p>Users</p>
                 </a>
               </li>
+                <li class="nav-item">
+                    <a href="{{ route('sysadmin.role_group.index') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Role Groups</p>
+                    </a>
+                </li>
+            <li class="nav-item">
+                <a href="{{ route('sysadmin.area.index') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Area</p>
+                </a>
+            </li>
             </ul>
           </li>
         </ul>

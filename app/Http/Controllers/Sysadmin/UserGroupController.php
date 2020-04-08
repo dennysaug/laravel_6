@@ -8,7 +8,7 @@ use App\UserGroup;
 
 class UserGroupController extends Controller
 {
-    
+
     public function index()
     {
         $list = UserGroup::all();
@@ -16,12 +16,17 @@ class UserGroupController extends Controller
         return view('sysadmin.user_group.index', compact($data));
     }
 
-    public function form(UserGroup $userGroup)
+    public function new()
+    {
+        return view('sysadmin.user_group.form');
+    }
+
+    public function edit(UserGroup $userGroup)
     {
         $data = [];
 
         if(!isset($userGroup->id)) {
-            $suserGroup = null;
+            $userGroup = null;
         }
 
         array_push($data, 'userGroup');
@@ -52,5 +57,5 @@ class UserGroupController extends Controller
         return redirect()->route('sysadmin.user_group.index')->with('status', 'The register was deleted with successful');
     }
 
-   
+
 }

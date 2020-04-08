@@ -41,6 +41,9 @@ class AppServiceProvider extends ServiceProvider
             $breadcrumb = array_map('ucwords', $breadcrumb);
             
             $view->with('breadcrumb', implode(' / ', $breadcrumb));
+
+            //user
+            $view->with('user', \Auth::user());
         });
     }
 }

@@ -6,7 +6,7 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">User Group</h3>
+                <h3 class="card-title">Area</h3>
               </div>
 
               @if ($errors->any())
@@ -20,11 +20,11 @@
               @endif
               <!-- /.card-header -->
               <!-- form start -->
-              {!! Form::model(isset($userGroup)?$userGroup:null, ['route' => ['sysadmin.user_group.store',isset($userGroup)?$userGroup:null]]) !!}
+              {!! Form::model($area, ['route' => ['sysadmin.area.store',$area]]) !!}
                 <div class="card-body">
                   <div class="form-group">
                     {!! Form::label('name', 'Name')!!}
-                    {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'name', 'placeholder' => "Enter the group's name"])!!}
+                    {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'name', 'placeholder' => ""])!!}
                   </div>
                 <!-- /.card-body -->
 

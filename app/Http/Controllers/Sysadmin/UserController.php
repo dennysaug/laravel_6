@@ -9,7 +9,7 @@ use App\UserGroup;
 
 class UserController extends Controller
 {
-    
+
     public function index()
     {
         $list = User::all();
@@ -17,7 +17,12 @@ class UserController extends Controller
         return view('sysadmin.user.index', compact($data));
     }
 
-    public function form(User $user)
+    public function new()
+    {
+        return view('sysadmin.user.form');
+    }
+
+    public function edit(User $user)
     {
         $data = [];
 
@@ -34,7 +39,7 @@ class UserController extends Controller
 
     public function store(User $user, UserRequest $request)
     {
-        
+
         $input = $request->only('name');
 
         if(isset($user->id)) {
@@ -56,5 +61,5 @@ class UserController extends Controller
         return redirect()->route('sysadmin.user.index')->with('status', 'The register was deleted with successful');
     }
 
-   
+
 }

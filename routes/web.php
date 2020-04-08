@@ -28,7 +28,7 @@ Route::post('auth/login/authenticate', [
     'uses' => 'Auth\LoginController@authenticate'
 ]);
 
-Route::group(['prefix' => 'sysadmin', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'sysadmin', 'middleware' => ['auth','permission']], function() {
 
     Route::get('auth/logout', [
         'as' => 'sysadmin.auth.logout',
@@ -39,9 +39,9 @@ Route::group(['prefix' => 'sysadmin', 'middleware' => 'auth'], function() {
         'as' => 'sysadmin.dashboard.index',
         'uses' => 'Sysadmin\DashboardController@index'
     ]);
-
+/*
     Route::group(['prefix' => 'user_group'], function() {
-        
+
         Route::get('/', [
             'as' => 'sysadmin.user_group.index',
             'uses' => 'Sysadmin\UserGroupController@index'
@@ -63,17 +63,54 @@ Route::group(['prefix' => 'sysadmin', 'middleware' => 'auth'], function() {
         ]);
 
     });
+*/
+
+
+    Route::group(['prefix' => 'user_group'], function() {
+
+        Route::get('/', [
+            'as' => 'sysadmin.user_group.index',
+            'uses' => 'Sysadmin\UserGroupController@index'
+        ]);
+
+        Route::get('new', [
+            'as' => 'sysadmin.user_group.new',
+            'uses' => 'Sysadmin\UserGroupController@new'
+        ]);
+
+        Route::get('edit/{userGroup}', [
+            'as' => 'sysadmin.user_group.edit',
+            'uses' => 'Sysadmin\UserGroupController@edit'
+        ]);
+
+        Route::post('store/{userGroup?}', [
+            'as' => 'sysadmin.user_group.store',
+            'uses' => 'Sysadmin\UserGroupController@store'
+        ]);
+
+        Route::get('delete/{userGroup}', [
+            'as' => 'sysadmin.user_group.delete',
+            'uses' => 'Sysadmin\UserGroupController@delete'
+        ]);
+
+    });
+
 
     Route::group(['prefix' => 'user'], function() {
-        
+
         Route::get('/', [
             'as' => 'sysadmin.user.index',
             'uses' => 'Sysadmin\UserController@index'
         ]);
 
-        Route::get('form/{user?}', [
-            'as' => 'sysadmin.user.form',
-            'uses' => 'Sysadmin\UserController@form'
+        Route::get('new', [
+            'as' => 'sysadmin.user.new',
+            'uses' => 'Sysadmin\UserController@new'
+        ]);
+
+        Route::get('edit/{user}', [
+            'as' => 'sysadmin.user.edit',
+            'uses' => 'Sysadmin\UserController@edit'
         ]);
 
         Route::post('store/{user?}', [
@@ -87,4 +124,49 @@ Route::group(['prefix' => 'sysadmin', 'middleware' => 'auth'], function() {
         ]);
 
     });
+
+    Route::group(['prefix' => 'area'], function() {
+
+        Route::get('/', [
+            'as' => 'sysadmin.area.index',
+            'uses' => 'Sysadmin\AreaController@index'
+        ]);
+
+        Route::get('form/{userGroup?}', [
+            'as' => 'sysadmin.area.form',
+            'uses' => 'Sysadmin\AreaController@form'
+        ]);
+
+        Route::post('store/{userGroup?}', [
+            'as' => 'sysadmin.area.store',
+            'uses' => 'Sysadmin\AreaController@store'
+        ]);
+
+        Route::get('delete/{userGroup}', [
+            'as' => 'sysadmin.area.delete',
+            'uses' => 'Sysadmin\AreaController@delete'
+        ]);
+
+    });
+
+
+    Route::group(['prefix' => 'role_group'], function() {
+
+        Route::get('/', [
+            'as' => 'sysadmin.role_group.index',
+            'uses' => 'Sysadmin\RoleGroupController@index'
+        ]);
+
+        Route::get('edit/{userGroup}', [
+            'as' => 'sysadmin.role_group.edit',
+            'uses' => 'Sysadmin\RoleGroupController@edit'
+        ]);
+
+        Route::post('store/{userGroup?}', [
+            'as' => 'sysadmin.role_group.store',
+            'uses' => 'Sysadmin\RoleGroupController@store'
+        ]);
+
+    });
+
 });

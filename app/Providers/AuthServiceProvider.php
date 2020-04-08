@@ -25,6 +25,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('permission', function($user,$route) {
+
+            $allowsRoute = [
+                'sysadmin.user.index'
+            ];
+
+//            return in_array($route,$allowsRoute);
+            return true;
+        });
     }
 }
