@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Sysadmin;
 
 use App\Area;
 use App\Http\Controllers\Controller;
+use App\User;
 use App\UserGroup;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,7 @@ class RoleGroupController extends Controller
     {
         $list = UserGroup::all();
         $data = ['list'];
+
         return view('sysadmin.role_group.index', compact($data));
     }
 
@@ -39,7 +41,15 @@ class RoleGroupController extends Controller
     {
         $input = $request->input('roles');
 
+        $users = User::where('user_group_id', $userGroup->id)->get();
+
         $userGroup->role_groups()->sync($input);
+
+        if(count($users)) {
+            foreach($users as $user) {
+                $user->permissions()->sync($input);
+            }
+        }
 
         return redirect()->route('sysadmin.role_group.index')->with('status', 'The register was stored with successful');
     }

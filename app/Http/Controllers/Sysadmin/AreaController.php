@@ -16,7 +16,12 @@ class AreaController extends Controller
         return view('sysadmin.area.index', compact($data));
     }
 
-    public function form(Area $area)
+    public function new()
+    {
+        return view('sysadmin.area.form');
+    }
+
+    public function edit(Area $area)
     {
         $data = [];
 

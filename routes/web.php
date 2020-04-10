@@ -125,6 +125,7 @@ Route::group(['prefix' => 'sysadmin', 'middleware' => ['auth','permission']], fu
 
     });
 
+
     Route::group(['prefix' => 'area'], function() {
 
         Route::get('/', [
@@ -132,22 +133,28 @@ Route::group(['prefix' => 'sysadmin', 'middleware' => ['auth','permission']], fu
             'uses' => 'Sysadmin\AreaController@index'
         ]);
 
-        Route::get('form/{userGroup?}', [
-            'as' => 'sysadmin.area.form',
-            'uses' => 'Sysadmin\AreaController@form'
+        Route::get('new', [
+            'as' => 'sysadmin.area.new',
+            'uses' => 'Sysadmin\AreaController@new'
         ]);
 
-        Route::post('store/{userGroup?}', [
+        Route::get('edit/{area}', [
+            'as' => 'sysadmin.area.edit',
+            'uses' => 'Sysadmin\AreaController@edit'
+        ]);
+
+        Route::post('store/{area?}', [
             'as' => 'sysadmin.area.store',
             'uses' => 'Sysadmin\AreaController@store'
         ]);
 
-        Route::get('delete/{userGroup}', [
+        Route::get('delete/{area}', [
             'as' => 'sysadmin.area.delete',
             'uses' => 'Sysadmin\AreaController@delete'
         ]);
 
     });
+
 
 
     Route::group(['prefix' => 'role_group'], function() {

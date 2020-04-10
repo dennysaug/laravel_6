@@ -25,25 +25,28 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('layouts.sysadmin', function($view) {
             $breadcrumb = request()->segments();
-            
+
             //change _ to space
             $breadcrumb = array_map(
                 'str_replace',
-                array_fill(0, count($breadcrumb), '_'), 
-                array_fill(0, count($breadcrumb), ' '), 
+                array_fill(0, count($breadcrumb), '_'),
+                array_fill(0, count($breadcrumb), ' '),
                 $breadcrumb
             );
 
             //destroy 1st item (sysadmin)
             $breadcrumb = array_slice($breadcrumb, 1, 2);
-            
+
             // 1st letter is capital
             $breadcrumb = array_map('ucwords', $breadcrumb);
-            
+
             $view->with('breadcrumb', implode(' / ', $breadcrumb));
 
             //user
             $view->with('user', \Auth::user());
+
         });
     }
+
+
 }

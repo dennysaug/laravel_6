@@ -20,9 +20,10 @@ class RolesTableSeeder extends Seeder
         ]);
         */
 
-        $area = ['id' => 1, 'name' => 'Role Groups'];
-
-        gen_route($area);
+        gen_route('User Group');
+        gen_route('User');
+        gen_route('Role Group');
+        gen_route('Area');
 
 
 

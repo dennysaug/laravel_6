@@ -20,7 +20,7 @@
               @endif
               <!-- /.card-header -->
               <!-- form start -->
-              {!! Form::model($area, ['route' => ['sysadmin.area.store',$area]]) !!}
+              {!! Form::model(isset($area)?$area:null, ['route' => ['sysadmin.area.store',isset($area)?$area:null]]) !!}
                 <div class="card-body">
                   <div class="form-group">
                     {!! Form::label('name', 'Name')!!}

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
@@ -27,12 +28,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('permission', function($user,$route) {
 
-            $allowsRoute = [
-                'sysadmin.user.index'
-            ];
+            $user = Auth::user();
+            $allowsRoutes = $user->permissions->pluck('alias')->toArray();
 
-//            return in_array($route,$allowsRoute);
-            return true;
+            return in_array($route,$allowsRoutes);
         });
     }
 }

@@ -1,6 +1,7 @@
 <?php
 //helper create by Dennys
 
+use App\Area;
 use App\Role;
 
 function gen_route($area)
@@ -15,24 +16,29 @@ function gen_route($area)
 
     $roles = [];
 
-    $lowerArea = str_replace(' ','_', strtolower($area['name']));
-    $upperArea = str_replace(' ', '', ucwords($area['name']));
-    $camelcase = \Str::camel($area['name']);
+    $area = Area::create(['name' => $area]);
+
+    $lowerArea = str_replace(' ','_', strtolower($area->name));
+    $upperArea = str_replace(' ', '', ucwords($area->name));
+    $camelcase = \Str::camel($area->name);
 
     foreach ($routes as $route) {
-        $roles[] = [
-            'area_id' => $area['id'],
+        $role = [
+            'area_id' => $area->id,
             'name' => ucfirst($route['name']),
             'route' => str_replace('##camelcase##', $camelcase, $route['url']),
             'alias' => "sysadmin.{$lowerArea}.{$route['route']}",
             'method' => $route['method'],
             'protected' => 'Y'
         ];
+
+        $roles[] = Role::create($role);
+        unset($role);
     }
 
-    $newRoles = Role::insert($roles);
+//    $newRoles = Role::insert($roles);
 
-    if($newRoles) {
+    if(count($roles)) {
 
 
         $txtRoutes = "

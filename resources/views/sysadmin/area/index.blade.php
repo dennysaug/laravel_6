@@ -8,7 +8,7 @@
           <div class="card">
             <!-- /.card-header -->
               <div class="card-body text-right">
-                <a class="btn btn-primary" href="{{ route('sysadmin.area.form') }}">
+                <a class="btn btn-primary" href="{{ route('sysadmin.area.new') }}">
                       <i class="fas fa-plus"></i> Add
                 </a>
               </div>
@@ -25,7 +25,7 @@
                   <tr>
                     <td>{{ $data->name }}</td>
                     <td>
-                    <a class="btn btn-primary btn-sm" href="{{ route('sysadmin.area.form', $data) }}" title="Edit">
+                    <a class="btn btn-primary btn-sm" href="{{ route('sysadmin.area.edit', $data) }}" title="Edit">
                       <i class="fas fa-edit"></i>
                     </a>
                     <a class="btn btn-danger btn-sm modal-delete"  data-toggle="modal" data-target="#modal-delete" href="{{ route('sysadmin.area.delete', $data) }}" title="Delete">

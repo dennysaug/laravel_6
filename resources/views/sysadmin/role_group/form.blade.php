@@ -62,7 +62,15 @@
                         </div>
                         {!! Form::close() !!}
                         @else
-                            <h3>No Areas</h3>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card-body text-center">
+                                        <div class="form-control">
+                                            <h3>No Areas</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endif
                     </div>
                     <!-- /.card -->
