@@ -6,7 +6,7 @@
             <!-- general form elements -->
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Role Group</h3>
+                    <h3 class="card-title">User</h3>
                 </div>
 
                 @if ($errors->any())
@@ -21,10 +21,10 @@
             <!-- /.card-header -->
                 <!-- form start -->
                 @if(isset($areas) && $areas->count())
-                    {!! Form::model(isset($userGroup)?$userGroup:null, ['route' => ['sysadmin.role_group.store',isset($userGroup)?$userGroup:null]]) !!}
+                    {!! Form::model(isset($user)?$user:null, ['route' => ['sysadmin.user.permission',isset($user)?$user:null]]) !!}
                     <div class="card-body">
                         <div class="form-group">
-                            <h3>{{ $userGroup->name }}</h3>
+                            <h3>{{ $user->name }}</h3>
                         </div>
                         @foreach($areas as $area)
                             @if($area->roles()->count())
@@ -41,7 +41,7 @@
                                                 @foreach($area->roles as $role)
                                                     <div class="form-group">
                                                         <div class="custom-control custom-switch">
-                                                            {!! Form::checkbox('roles[]', $role->id, in_array($role->id,$roleGroups), ['class' => 'custom-control-input', 'id' => 'customSwitch' . $role->id]) !!}
+                                                            {!! Form::checkbox('roles[]', $role->id, in_array($role->id,$rolesUser), ['class' => 'custom-control-input', 'id' => 'customSwitch' . $role->id]) !!}
                                                             {!! Form::label('customSwitch'.$role->id, $role->name, ['class' => 'custom-control-label']) !!}
                                                         </div>
                                                     </div>
@@ -54,7 +54,7 @@
                                 </div>
                             @endif
                         @endforeach
-                        @can('permission', 'sysadmin.role_group.store')
+                        @can('permission', 'sysadmin.user.store')
                             <div class="card-footer">
                                 {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
                             </div>

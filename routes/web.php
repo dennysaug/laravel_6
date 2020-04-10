@@ -123,6 +123,11 @@ Route::group(['prefix' => 'sysadmin', 'middleware' => ['auth','permission']], fu
             'uses' => 'Sysadmin\UserController@delete'
         ]);
 
+        Route::match(['get','post'],'permission/{user}', [
+            'as' => 'sysadmin.user.permission',
+            'uses' => 'Sysadmin\UserController@permission'
+        ]);
+
     });
 
 

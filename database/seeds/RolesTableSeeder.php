@@ -12,18 +12,14 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        /*
-        Area::insert([
-            ['name' => 'User'],
-            ['name' => 'User Group'],
-            ['name' => 'Area']
-        ]);
-        */
 
-        gen_route('User Group');
-        gen_route('User');
-        gen_route('Role Group');
-        gen_route('Area');
+//        gen_route('User Group');
+//        gen_route('User');
+//        gen_route('Role Group');
+//        gen_route('Area');
+        gen_route('Category');
+        gen_route('Product');
+        
 
 
 

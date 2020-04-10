@@ -7,11 +7,13 @@
         <div class="col-12">
           <div class="card">
             <!-- /.card-header -->
-              <div class="card-body text-right">
-                <a class="btn btn-primary" href="{{ route('sysadmin.area.new') }}">
-                      <i class="fas fa-plus"></i> Add
-                </a>
-              </div>
+              @can('permission', 'sysadmin.area.new')
+                  <div class="card-body text-right">
+                    <a class="btn btn-primary" href="{{ route('sysadmin.area.new') }}">
+                          <i class="fas fa-plus"></i> Add
+                    </a>
+                  </div>
+              @endcan
             @if(isset($list) && $list->count() >0)
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
@@ -25,12 +27,16 @@
                   <tr>
                     <td>{{ $data->name }}</td>
                     <td>
-                    <a class="btn btn-primary btn-sm" href="{{ route('sysadmin.area.edit', $data) }}" title="Edit">
-                      <i class="fas fa-edit"></i>
-                    </a>
-                    <a class="btn btn-danger btn-sm modal-delete"  data-toggle="modal" data-target="#modal-delete" href="{{ route('sysadmin.area.delete', $data) }}" title="Delete">
-                      <i class="fas fa-trash"></i>
-                    </a>
+                    @can('permission', 'sysadmin.area.edit')
+                        <a class="btn btn-primary btn-sm" href="{{ route('sysadmin.area.edit', $data) }}" title="Edit">
+                          <i class="fas fa-edit"></i>
+                        </a>
+                    @endcan
+                    @can('permission', 'sysadmin.area.delete')
+                        <a class="btn btn-danger btn-sm modal-delete"  data-toggle="modal" data-target="#modal-delete" href="{{ route('sysadmin.area.delete', $data) }}" title="Delete">
+                          <i class="fas fa-trash"></i>
+                        </a>
+                    @endcan
                     </td>
                   </tr>
                 @endforeach

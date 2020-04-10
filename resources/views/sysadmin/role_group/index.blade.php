@@ -22,9 +22,11 @@
                     <td>{{ $data->name }}</td>
                     <td>0</td>
                     <td>
-                    <a class="btn btn-primary btn-sm" href="{{ route('sysadmin.role_group.edit', $data) }}" title="Edit">
-                      <i class="fas fa-edit"></i>
-                    </a>
+                    @can('permission', 'sysadmin.role_group.edit')
+                        <a class="btn btn-primary btn-sm" href="{{ route('sysadmin.role_group.edit', $data) }}" title="Edit">
+                          <i class="fas fa-edit"></i>
+                        </a>
+                    @endcan
                     </td>
                   </tr>
                 @endforeach

@@ -39,11 +39,21 @@ class User extends Authenticatable
 
     public function group()
     {
-        return $this->belongsTo('App\UserGroup', 'id');
+        return $this->belongsTo('App\UserGroup','user_group_id');
     }
 
     public function permissions()
     {
         return $this->belongsToMany('App\Role', 'permissions', 'user_id', 'role_id');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        self::updated(function($model) {
+            $role_groups = $model->group->role_groups->pluck('id')->toArray();
+            $model->permissions()->sync($role_groups);
+        });
     }
 }
