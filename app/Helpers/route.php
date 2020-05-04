@@ -16,15 +16,24 @@ function gen_route($area)
 
     $roles = [];
 
-    $area = Area::create(['name' => $area]);
+    if(!isset($area['id'])) {
+        $area = Area::create(['name' => $area]);
+        $areaName = $area->name;
+        $areaID = $area->id;
+    } else {
+        $areaName = $area['name'];
+        $areaID = $area['id'];
+    }
 
-    $lowerArea = str_replace(' ','_', strtolower($area->name));
-    $upperArea = str_replace(' ', '', ucwords($area->name));
-    $camelcase = \Str::camel($area->name);
+
+
+    $lowerArea = str_replace(' ','_', strtolower($areaName));
+    $upperArea = str_replace(' ', '', ucwords($areaName));
+    $camelcase = \Str::camel($areaName);
 
     foreach ($routes as $route) {
         $role = [
-            'area_id' => $area->id,
+            'area_id' => $areaID,
             'name' => ucfirst($route['name']),
             'route' => str_replace('##camelcase##', $camelcase, $route['url']),
             'alias' => "sysadmin.{$lowerArea}.{$route['route']}",
@@ -82,8 +91,8 @@ function gen_route($area)
         fclose($file);
 
 
-        dump('File generated in ' . base_path('/routes/routes_' . $lowerArea . '.txt'));
+        return true;
     } else {
-        dump('Error!');
+        return false;
     }
 }

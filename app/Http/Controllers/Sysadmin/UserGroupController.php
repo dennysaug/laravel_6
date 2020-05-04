@@ -38,23 +38,41 @@ class UserGroupController extends Controller
     {
         $input = $request->only('name');
 
-        if(isset($userGroup->id)) {
-            $stored = $userGroup->update($input);
-        } else {
-            $stored = UserGroup::create($input);
+        try {
+
+            if(isset($userGroup->id)) {
+                $userGroup->update($input);
+            } else {
+                UserGroup::create($input);
+            }
+
+            return redirect()->route('sysadmin.user_group.index')->with('status',true)->with('msg', env('MSG_SUCCESS'));
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('sysadmin.user_group.index')->with('status', false)->with('msg', $e->getMessage());
 
         }
 
-        return redirect()->route('sysadmin.user_group.index')->with('status', 'The register was stored with successful');
     }
 
     public function delete(UserGroup $userGroup)
     {
-        if(isset($userGroup->id)) {
-            $delete = $userGroup->delete();
+        try {
+
+            if(isset($userGroup->id)) {
+                $delete = $userGroup->delete();
+            }
+
+            return redirect()->route('sysadmin.user_group.index')->with('status',true)->with('msg', env('MSG_SUCCESS'));
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('sysadmin.user_group.index')->with('status', false)->with('msg', $e->getMessage());
+
         }
 
-        return redirect()->route('sysadmin.user_group.index')->with('status', 'The register was deleted with successful');
+
     }
 
 

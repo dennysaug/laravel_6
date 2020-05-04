@@ -44,23 +44,41 @@ class UserController extends Controller
 
         $input = $request->except('_token');
 
-        if(isset($user->id)) {
-            $stored = $user->update($input);
-        } else {
-            $stored = UserGroup::create($input);
+        try {
+
+            if(isset($user->id)) {
+                $stored = $user->update($input);
+            } else {
+                $stored = UserGroup::create($input);
+
+            }
+
+            return redirect()->route('sysadmin.user.index')->with('msg', env('MSG_SUCCESS'));
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('sysadmin.user.index')->with('status', false)->with('msg', $e->getMessage());
 
         }
 
-        return redirect()->route('sysadmin.user.index')->with('status', 'The register was stored with successful');
+
     }
 
     public function delete(User $user)
     {
-        if(isset($user->id)) {
-            $delete = $user->delete();
-        }
+        try {
 
-        return redirect()->route('sysadmin.user.index')->with('status', 'The register was deleted with successful');
+            if(isset($user->id)) {
+                $delete = $user->delete();
+            }
+
+            return redirect()->route('sysadmin.user.index')->with('msg', env('MSG_SUCCESS'));
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('sysadmin.user.index')->with('status', false)->with('msg', $e->getMessage());
+
+        }
     }
 
     public function permission(User $user, Request $request)
@@ -71,16 +89,23 @@ class UserController extends Controller
         $data = ['user', 'rolesUser', 'areas'];
 
         if ($request->isMethod('post')) {
-            if (isset($user->id)) {
-                $input = $request->input('roles');
-                $user->permissions()->sync($input);
 
-                return redirect()->route('sysadmin.user.index')->with('status', 'The register was updated with successful');
+            try {
 
-            } else {
-                $status = '0';
-                $msg = 'User not found';
+                if (isset($user->id)) {
+                    $input = $request->input('roles');
+                    $user->permissions()->sync($input);
+
+                    return redirect()->route('sysadmin.user.index')->with('status', 'The register was updated with successful');
+
+                }
+
+            } catch (\Exception $e) {
+
+                return redirect()->route('sysadmin.user.index')->with('status', false)->with('msg', $e->getMessage());
+
             }
+
         }
 
         return view('sysadmin.user.permission',compact($data));

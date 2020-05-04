@@ -177,6 +177,24 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+            <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>
+                        Product
+                        <i class="fas fa-angle-left right"></i>
+                        <!-- <span class="badge badge-info right">6</span> -->
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('sysadmin.category.index') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Category</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
@@ -228,6 +246,14 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">Sysadmin</h1>
+            @if(session('status') === false)
+                  <div class="alert alert-danger alert-dismissible">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                      <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+                      {{ session('msg') }}
+                  </div>
+
+            @endif
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -312,10 +338,10 @@ $('.modal-delete').click(function(){
       timer: 3000
     })
 
-    @if (session('status'))
+    @if (session('msg') && session('status'))
       Toast.fire({
           type: 'success',
-          title: '{{ session('status') }}'
+          title: '{{ session('msg') }}'
         });
     @endif
   });

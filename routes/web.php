@@ -181,4 +181,35 @@ Route::group(['prefix' => 'sysadmin', 'middleware' => ['auth','permission']], fu
 
     });
 
+
+    Route::group(['prefix' => 'category'], function() {
+
+        Route::get('/', [
+            'as' => 'sysadmin.category.index',
+            'uses' => 'Sysadmin\CategoryController@index'
+        ]);
+
+        Route::get('new', [
+            'as' => 'sysadmin.category.new',
+            'uses' => 'Sysadmin\CategoryController@new'
+        ]);
+
+        Route::get('edit/{category}', [
+            'as' => 'sysadmin.category.edit',
+            'uses' => 'Sysadmin\CategoryController@edit'
+        ]);
+
+        Route::post('store/{category?}', [
+            'as' => 'sysadmin.category.store',
+            'uses' => 'Sysadmin\CategoryController@store'
+        ]);
+
+        Route::get('delete/{category}', [
+            'as' => 'sysadmin.category.delete',
+            'uses' => 'Sysadmin\CategoryController@delete'
+        ]);
+
+    });
+
+
 });

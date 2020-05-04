@@ -38,23 +38,42 @@ class AreaController extends Controller
     {
         $input = $request->only('name');
 
-        if(isset($area->id)) {
-            $stored = $area->update($input);
-        } else {
-            $stored = Area::create($input);
+        try {
+
+            if(isset($area->id)) {
+                $area->update($input);
+            } else {
+                Area::create($input);
+                gen_route($stored->toArray());
+            }
+
+            return redirect()->route('sysadmin.area.index')->with('status',true)->with('msg', env('MSG_SUCCESS'));
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('sysadmin.area.index')->with('status', false)->with('msg', $e->getMessage());
 
         }
 
-        return redirect()->route('sysadmin.area.index')->with('status', 'The register was stored with successful');
     }
 
     public function delete(Area $area)
     {
-        if(isset($area->id)) {
-            $delete = $area->delete();
+        try {
+
+            if(isset($area->id)) {
+                $delete = $area->delete();
+            }
+
+            return redirect()->route('sysadmin.area.index')->with('msg', env('MSG_SUCCESS'));
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('sysadmin.area.index')->with('status', false)->with('msg', $e->getMessage());
+
         }
 
-        return redirect()->route('sysadmin.area.index')->with('status', 'The register was deleted with successful');
+
     }
 
 

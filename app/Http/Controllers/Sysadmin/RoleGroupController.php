@@ -41,16 +41,26 @@ class RoleGroupController extends Controller
     {
         $input = $request->input('roles');
 
-        $users = User::where('user_group_id', $userGroup->id)->get();
+        try {
 
-        $userGroup->role_groups()->sync($input);
+            $users = User::where('user_group_id', $userGroup->id)->get();
 
-        if(count($users)) {
-            foreach($users as $user) {
-                $user->permissions()->sync($input);
+            $userGroup->role_groups()->sync($input);
+
+            if(count($users)) {
+                foreach($users as $user) {
+                    $user->permissions()->sync($input);
+                }
             }
+
+            return redirect()->route('sysadmin.role_group.index')->with('status', 'The register was stored with successful');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('sysadmin.role_group.index')->with('status', false)->with('msg', $e->getMessage());
+
         }
 
-        return redirect()->route('sysadmin.role_group.index')->with('status', 'The register was stored with successful');
+
     }
 }
