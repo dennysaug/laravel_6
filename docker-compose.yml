@@ -10,8 +10,8 @@ services:
     working_dir: /opt
     links:
       - php1
-      - php2
-      - php3
+#      - php2
+#      - php3
     networks:
       - develop
     volumes:
@@ -19,8 +19,8 @@ services:
       - ./laravel.conf:/etc/nginx/conf.d/laravel.conf
     depends_on:
       - php1
-      - php2
-      - php3
+#      - php2
+#      - php3
   db:
     image: mysql
     container_name: database
@@ -31,6 +31,7 @@ services:
       - "3306"
     volumes:
       - $PWD/storage/database:/var/lib/mysql
+#      - persistent:/var/lib/mysql
     networks:
       - develop
     environment:
@@ -55,36 +56,36 @@ services:
       - db
     links:
       - db
-  php2:
-    image: php:7.3.4-fpm
-    container_name: php2
-    volumes:
-      - .:/opt
-    working_dir: /opt
-    command: sh install.sh
-    environment:
-      INSTALL_VENDOR: 'n'
-    networks:
-      - develop
-    depends_on:
-      - db
-    links:
-      - db
-  php3:
-    image: php:7.3.4-fpm
-    container_name: php3
-    volumes:
-      - .:/opt
-    working_dir: /opt
-    command: sh install.sh
-    environment:
-      INSTALL_VENDOR: 'n'
-    networks:
-      - develop
-    depends_on:
-      - db
-    links:
-      - db
+#  php2:
+#    image: php:7.3.4-fpm
+#    container_name: php2
+#    volumes:
+#      - .:/opt
+#    working_dir: /opt
+#    command: sh install.sh
+#    environment:
+#      INSTALL_VENDOR: 'n'
+#    networks:
+#      - develop
+#    depends_on:
+#      - db
+#    links:
+#      - db
+#  php3:
+#    image: php:7.3.4-fpm
+#    container_name: php3
+#    volumes:
+#      - .:/opt
+#    working_dir: /opt
+#    command: sh install.sh
+#    environment:
+#      INSTALL_VENDOR: 'n'
+#    networks:
+#      - develop
+#    depends_on:
+#      - db
+#    links:
+#      - db
 networks:
   develop:
     driver: bridge

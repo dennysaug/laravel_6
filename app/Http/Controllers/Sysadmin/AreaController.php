@@ -43,7 +43,7 @@ class AreaController extends Controller
             if(isset($area->id)) {
                 $area->update($input);
             } else {
-                Area::create($input);
+                $stored = Area::create($input);
                 gen_route($stored->toArray());
             }
 

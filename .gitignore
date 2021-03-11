@@ -5,8 +5,11 @@
 /storage/database
 /vendor
 .env
-.env.backup
-.phpunit.result.cache
+.editorconfig
+.gitattributes
+.styleci.yml
+.idea/
+*.txt
 Homestead.json
 Homestead.yaml
 npm-debug.log

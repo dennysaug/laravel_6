@@ -1,6 +1,6 @@
 <?php
 
-use App\Area;
+use App\Role;
 use Illuminate\Database\Seeder;
 
 class RolesTableSeeder extends Seeder
@@ -13,15 +13,20 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
 
-//        gen_route('User Group');
-//        gen_route('User');
-//        gen_route('Role Group');
-//        gen_route('Area');
-        gen_route('Category');
-        gen_route('Product');
-        
 
-
+        gen_route('Dashboard');
+//        gen_route('Product');
+//        Role::create(
+//            [
+//                'area_id' => 10,
+//                'name' => 'Order',
+//                'route' => 'order',
+//                'alias' => 'sysadmin.product.order',
+//                'method' => 'post',
+//                'protected' => 'Y'
+//
+//            ]
+//        );
 
     }
 }

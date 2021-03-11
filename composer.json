@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
+        "intervention/image": "^2.5",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
         "laravelcollective/html": "^6.0"
@@ -36,7 +37,8 @@
             "App\\": "app/"
         },
         "files": [
-            "app/Helpers/route.php"
+            "app/Helpers/route.php",
+            "app/Helpers/uploadImage.php"
         ],
         "classmap": [
             "database/seeds",

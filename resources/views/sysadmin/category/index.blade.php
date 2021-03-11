@@ -1,20 +1,20 @@
 @extends('layouts.sysadmin')
 
 @section('content')
-    <!-- Main content -->
+      <!-- Main content -->
       <section class="content">
       <div class="row">
         <div class="col-12">
           <div class="card">
             <!-- /.card-header -->
-              @can('permission', 'sysadmin.user_group.new')
+              @can('permission', 'sysadmin.category.new')
                   <div class="card-body text-right">
-                    <a class="btn btn-primary" href="{{ route('sysadmin.user_group.new') }}">
+                    <a class="btn btn-primary" href="{{ route('sysadmin.category.new') }}">
                           <i class="fas fa-plus"></i> Add
                     </a>
                   </div>
               @endcan
-          @if(isset($list) && $list->count() >0)
+            @if(isset($list) && $list->count() >0)
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -27,22 +27,16 @@
                   <tr>
                     <td>{{ $data->name }}</td>
                     <td>
-                    @can('permission', 'sysadmin.user_group.edit')
-                        <a class="btn btn-primary btn-sm" href="{{ route('sysadmin.user_group.edit', $data) }}" title="Edit">
+                    @can('permission', 'sysadmin.category.edit')
+                        <a class="btn btn-primary btn-sm" href="{{ route('sysadmin.category.edit', $data) }}" title="Edit">
                           <i class="fas fa-edit"></i>
                         </a>
                     @endcan
-                    @can('permission', 'sysadmin.role_group.edit')
-                        <a class="btn btn-warning btn-sm" href="{{ route('sysadmin.role_group.edit', $data) }}" title="Permission">
-                            <i class="fas fa-lock"></i>
-                        </a>
-                    @endcan
-                    @can('permission', 'sysadmin.user_group.delete')
-                        <a class="btn btn-danger btn-sm modal-delete"  data-toggle="modal" data-target="#modal-delete" href="{{ route('sysadmin.user_group.delete', $data) }}" title="Delete">
+                    @can('permission', 'sysadmin.category.delete')
+                        <a class="btn btn-danger btn-sm modal-delete"  data-toggle="modal" data-target="#modal-delete" href="{{ route('sysadmin.category.delete', $data) }}" title="Delete">
                           <i class="fas fa-trash"></i>
                         </a>
                     @endcan
-
                     </td>
                   </tr>
                 @endforeach

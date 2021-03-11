@@ -41,10 +41,9 @@ class CategoryController extends Controller
         try {
 
             if(isset($category->id)) {
-                $stored = $category->update($input);
+                $category->update($input);
             } else {
-                $stored = Category::create($input);
-                gen_route($stored->toArray());
+                Category::create($input);
             }
 
             return redirect()->route('sysadmin.category.index')->with('status',true)->with('msg', env('MSG_SUCCESS'));

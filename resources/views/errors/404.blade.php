@@ -1,5 +1,5 @@
-@extends('layouts.sysadmin')
-@section('content')
+{{--@extends('layouts.sysadmin')--}}
+{{--@section('content')--}}
 <!-- Main content -->
 <section class="content">
     <div class="error-page">
@@ -19,4 +19,4 @@
     <!-- /.error-page -->
 </section>
 <!-- /.content -->
-@endsection
+{{--@endsection--}}

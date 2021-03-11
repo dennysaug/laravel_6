@@ -164,11 +164,12 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
+{{--        <div class="image">--}}
+{{--          <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">--}}
+{{--        </div>--}}
         <div class="info">
           <a href="#" class="d-block">{{ $user->name }}</a>
+          <a href="{{ route('sysadmin.auth.logout') }}" class="d-block">Log out</a>
         </div>
       </div>
 
@@ -191,6 +192,12 @@
                         <a href="{{ route('sysadmin.category.index') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Category</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('sysadmin.product.index') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Product</p>
                         </a>
                     </li>
                 </ul>

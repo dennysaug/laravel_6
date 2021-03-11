@@ -18,6 +18,11 @@ Route::get('/', function () {
 });
 
 
+Route::get('media/show/{path}/{area}/{size}/{image}', [
+    'as' => 'site.media.image',
+    'uses' => 'Site\MediaController@image'
+]);
+
 Route::get('/auth/login/sysadmin', [
     'as' => 'auth.login.index',
     'uses' => 'Auth\LoginController@index'
@@ -39,31 +44,11 @@ Route::group(['prefix' => 'sysadmin', 'middleware' => ['auth','permission']], fu
         'as' => 'sysadmin.dashboard.index',
         'uses' => 'Sysadmin\DashboardController@index'
     ]);
-/*
-    Route::group(['prefix' => 'user_group'], function() {
 
-        Route::get('/', [
-            'as' => 'sysadmin.user_group.index',
-            'uses' => 'Sysadmin\UserGroupController@index'
-        ]);
-
-        Route::get('form/{userGroup?}', [
-            'as' => 'sysadmin.user_group.form',
-            'uses' => 'Sysadmin\UserGroupController@form'
-        ]);
-
-        Route::post('store/{userGroup?}', [
-            'as' => 'sysadmin.user_group.store',
-            'uses' => 'Sysadmin\UserGroupController@store'
-        ]);
-
-        Route::get('delete/{userGroup}', [
-            'as' => 'sysadmin.user_group.delete',
-            'uses' => 'Sysadmin\UserGroupController@delete'
-        ]);
-
-    });
-*/
+    Route::get('dashboard/edit',[
+        'as' => 'sysadmin.dashboard.edit',
+        'uses' => 'Sysadmin\DashboardController@cooking'
+    ]);
 
 
     Route::group(['prefix' => 'user_group'], function() {
@@ -207,6 +192,41 @@ Route::group(['prefix' => 'sysadmin', 'middleware' => ['auth','permission']], fu
         Route::get('delete/{category}', [
             'as' => 'sysadmin.category.delete',
             'uses' => 'Sysadmin\CategoryController@delete'
+        ]);
+
+    });
+
+
+    Route::group(['prefix' => 'product'], function() {
+
+        Route::get('/', [
+            'as' => 'sysadmin.product.index',
+            'uses' => 'Sysadmin\ProductController@index'
+        ]);
+
+        Route::get('new', [
+            'as' => 'sysadmin.product.new',
+            'uses' => 'Sysadmin\ProductController@new'
+        ]);
+
+        Route::get('edit/{product}', [
+            'as' => 'sysadmin.product.edit',
+            'uses' => 'Sysadmin\ProductController@edit'
+        ]);
+
+        Route::post('store/{product?}', [
+            'as' => 'sysadmin.product.store',
+            'uses' => 'Sysadmin\ProductController@store'
+        ]);
+
+        Route::post('order', [
+            'as' => 'sysadmin.product.order',
+            'uses' => 'Sysadmin\ProductController@order'
+        ]);
+
+        Route::get('delete/{product}', [
+            'as' => 'sysadmin.product.delete',
+            'uses' => 'Sysadmin\ProductController@delete'
         ]);
 
     });
